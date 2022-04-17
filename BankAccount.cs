@@ -42,14 +42,7 @@ namespace Shekelstein_Bank_App
                 }
             }
         }
-        public int Balance
-        {
-            get { return balance; }
-            set
-            {
-                balance = value;
-            }
-        }
+
         public BankAccount()
         {
 
@@ -75,36 +68,29 @@ namespace Shekelstein_Bank_App
                     case "2":
                         Console.WriteLine("Введите сумму для вноса на счет:");
                         string? stringBalance = Console.ReadLine();
-                        if(int.TryParse(stringBalance, out balance) && Convert.ToInt32(stringBalance) > 0)
+                        if(int.TryParse(stringBalance, out int result) && Convert.ToInt32(stringBalance) > 0)
                         {
-                            
-                                Balance = Convert.ToInt32(stringBalance);
+                                balance += Convert.ToInt32(stringBalance);
                                 Console.WriteLine("Пополнение баланса, ожидайте...");
-                                System.Threading.Thread.Sleep(5000);
+                                //Thread.Sleep(5000);
                                 Console.WriteLine($"Баланс успешно пополнен. На вашем счету {balance} тенге");
-                            
-                            
-                            
-                               
-                            
-                            
                                 MenuShowUp();
-                            
                         }
                         else
                         {
                             Console.WriteLine("Некорректный ввод суммы");
+                            MenuShowUp();
                         }
-                        MenuShowUp();
+                        
                         break;
                     case "3":
                         Console.WriteLine("Введите сумму для снятия со счета:");
                         stringBalance = Console.ReadLine();
-                        if (int.TryParse(stringBalance, out int result) && Convert.ToInt32(stringBalance)>0)
+                        if (int.TryParse(stringBalance, out result) && Convert.ToInt32(stringBalance)>0)
                         {
-                                if (Balance >= Convert.ToInt32(stringBalance))
+                                if (balance >= Convert.ToInt32(stringBalance))
                                 {
-                                    Balance -= Convert.ToInt32(stringBalance);
+                                    balance -= Convert.ToInt32(stringBalance);
                                 }
                                 else
                                 {
@@ -113,17 +99,16 @@ namespace Shekelstein_Bank_App
                                     break;
                                 }
                                 Console.WriteLine("Снятие средств, ожидайте...");
-                                Thread.Sleep(5000);
+                                //Thread.Sleep(5000);
                                 Console.WriteLine($"Средства успешно сняты. На вашем счету {balance} тенге.");
-
                                 MenuShowUp();
                             
                         }
                         else
                         {
                             Console.WriteLine("Некорректный ввод суммы");
+                            MenuShowUp();
                         }
-                        MenuShowUp();
                         break;
                     case "4":
                         Console.WriteLine("Хорошего дня.");
@@ -134,8 +119,6 @@ namespace Shekelstein_Bank_App
                         MenuShowUp();
                         break;
                 }
-            
-            
         }
         public void StartingUp()
         {
