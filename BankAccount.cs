@@ -72,7 +72,7 @@ namespace Shekelstein_Bank_App
                         {
                                 balance += Convert.ToInt32(stringBalance);
                                 Console.WriteLine("Пополнение баланса, ожидайте...");
-                                //Thread.Sleep(5000);
+                                Thread.Sleep(5000);
                                 Console.WriteLine($"Баланс успешно пополнен. На вашем счету {balance} тенге");
                                 MenuShowUp();
                         }
@@ -99,7 +99,7 @@ namespace Shekelstein_Bank_App
                                     break;
                                 }
                                 Console.WriteLine("Снятие средств, ожидайте...");
-                                //Thread.Sleep(5000);
+                                Thread.Sleep(5000);
                                 Console.WriteLine($"Средства успешно сняты. На вашем счету {balance} тенге.");
                                 MenuShowUp();
                             
