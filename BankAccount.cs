@@ -54,22 +54,15 @@ namespace Shekelstein_Bank_App
         {
 
         }
-        ~BankAccount()
-        {
-            Console.WriteLine("Аккаунт удален.");
-        }
         public void MenuShowUp()
         {
-
-
             Console.WriteLine("Меню.");
             Console.WriteLine("1. Информация о счёте.");
             Console.WriteLine("2. Внести средства на счёт.");
             Console.WriteLine("3. Снять средства со счёта");
             Console.WriteLine("4. Выйти");
             string? choice = Console.ReadLine();
-            if (choice != null)
-            { 
+
                 switch (choice)
                 {
                     case "1":
@@ -82,12 +75,21 @@ namespace Shekelstein_Bank_App
                     case "2":
                         Console.WriteLine("Введите сумму для вноса на счет:");
                         string? stringBalance = Console.ReadLine();
-                        if(stringBalance!=null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator) && Convert.ToInt32(stringBalance) > 0)
+                        if(int.TryParse(stringBalance, out balance) && Convert.ToInt32(stringBalance) > 0)
                         {
-                            Balance = Convert.ToInt32(stringBalance);
-                            Console.WriteLine("Пополнение баланса, ожидайте...");
-                            System.Threading.Thread.Sleep(5000);
-                            Console.WriteLine($"Баланс успешно пополнен. На вашем счету {balance} тенге");
+                            
+                                Balance = Convert.ToInt32(stringBalance);
+                                Console.WriteLine("Пополнение баланса, ожидайте...");
+                                System.Threading.Thread.Sleep(5000);
+                                Console.WriteLine($"Баланс успешно пополнен. На вашем счету {balance} тенге");
+                            
+                            
+                            
+                               
+                            
+                            
+                                MenuShowUp();
+                            
                         }
                         else
                         {
@@ -98,21 +100,24 @@ namespace Shekelstein_Bank_App
                     case "3":
                         Console.WriteLine("Введите сумму для снятия со счета:");
                         stringBalance = Console.ReadLine();
-                        if (stringBalance != null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator) && Convert.ToInt32(stringBalance)>0)
+                        if (int.TryParse(stringBalance, out int result) && Convert.ToInt32(stringBalance)>0)
                         {
-                            if (balance >= Convert.ToInt32(stringBalance))
-                            {
-                                Balance -= Convert.ToInt32(stringBalance);
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Недостаточно средств. На вашем счету {balance} тенге.");
+                                if (Balance >= Convert.ToInt32(stringBalance))
+                                {
+                                    Balance -= Convert.ToInt32(stringBalance);
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Недостаточно средств. На вашем счету {balance} тенге.");
+                                    MenuShowUp();
+                                    break;
+                                }
+                                Console.WriteLine("Снятие средств, ожидайте...");
+                                Thread.Sleep(5000);
+                                Console.WriteLine($"Средства успешно сняты. На вашем счету {balance} тенге.");
+
                                 MenuShowUp();
-                                break;
-                            }
-                            Console.WriteLine("Снятие средств, ожидайте...");
-                            Thread.Sleep(5000);
-                            Console.WriteLine($"Средства успешно сняты. На вашем счету {balance} тенге.");
+                            
                         }
                         else
                         {
@@ -129,12 +134,8 @@ namespace Shekelstein_Bank_App
                         MenuShowUp();
                         break;
                 }
-            }
-            else
-            {
-                Console.WriteLine("Некорректный выбор пункта.");
-                MenuShowUp();
-            }
+            
+            
         }
         public void StartingUp()
         {
