@@ -47,7 +47,7 @@ namespace Shekelstein_Bank_App
             get { return balance; }
             set
             {
-                    balance = value;
+                balance = value;
             }
         }
         public BankAccount()
@@ -82,7 +82,7 @@ namespace Shekelstein_Bank_App
                     case "2":
                         Console.WriteLine("Введите сумму для вноса на счет:");
                         string? stringBalance = Console.ReadLine();
-                        if(stringBalance!=null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator))
+                        if(stringBalance!=null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator) && Convert.ToInt32(stringBalance) > 0)
                         {
                             Balance = Convert.ToInt32(stringBalance);
                             Console.WriteLine("Пополнение баланса, ожидайте...");
@@ -98,7 +98,7 @@ namespace Shekelstein_Bank_App
                     case "3":
                         Console.WriteLine("Введите сумму для снятия со счета:");
                         stringBalance = Console.ReadLine();
-                        if (stringBalance != null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator))
+                        if (stringBalance != null && stringBalance.All(char.IsNumber) && !stringBalance.Any(char.IsWhiteSpace) && !stringBalance.Any(char.IsSeparator) && Convert.ToInt32(stringBalance)>0)
                         {
                             if (balance >= Convert.ToInt32(stringBalance))
                             {
